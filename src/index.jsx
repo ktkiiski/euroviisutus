@@ -1,8 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import * as firebase from 'firebase/app';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import 'firebase/firestore';
+
+firebase.initializeApp({
+  apiKey: 'AIzaSyDIRK1lcVM_SRov9SHYVkBLLkrUQm5DTe8',
+  authDomain: 'euroviisutus.firebaseapp.com',
+  databaseURL: 'https://euroviisutus.firebaseio.com',
+  projectId: 'euroviisutus',
+  storageBucket: 'euroviisutus.appspot.com',
+  messagingSenderId: '535056031434',
+  appId: '1:535056031434:web:acbe1686d1028bf9155e33',
+});
 
 ReactDOM.render(
   <React.StrictMode>

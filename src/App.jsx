@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import firebase from 'firebase/app';
 import logo from './logo.svg';
 import './App.css';
 
+const pollId = 'dev';
+
 function App() {
+  const db = firebase.firestore();
+  const [newName, setNewName] = useState('');
+  const [participants = []] = useCollectionData(
+    db.collection('polls').doc(pollId).collection('participants'),
+    { idField: 'id' },
+  );
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
+        {participants.map((participant) => (
+          <p key={participant.id}>{participant.name}</p>
+        ))}
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -22,6 +28,21 @@ function App() {
         >
           Learn React
         </a>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            const participantId = newName.toLowerCase();
+            db.collection('polls')
+              .doc(pollId)
+              .collection('participants')
+              .doc(participantId)
+              .set({ name: newName });
+            setNewName('');
+          }}
+        >
+          <input type="text" value={newName} onChange={(ev) => setNewName(ev.currentTarget.value)} />
+          <button type="submit" disabled={!newName}>Add</button>
+        </form>
       </header>
     </div>
   );
