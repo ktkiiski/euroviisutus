@@ -3,6 +3,64 @@ import PropTypes from 'prop-types';
 import { Container, TextField, Button } from '@material-ui/core';
 import { usePollParticipants, useDatabase } from './data';
 
+const groups = [{
+  title: 'Group 1',
+  description: 'Choose your top 3 from the countries from this group!',
+  countries: [
+    'Azerbaijan',
+    'The United Kingdom',
+    'Russia',
+    'Switzerland',
+    'Bulgaria',
+  ],
+}, {
+  title: 'Group 2',
+  description: 'Choose your top 3 from the countries from this group!',
+  countries: [
+    'Italy',
+    'Lithuania',
+    'Norway',
+    'Sweden',
+    'Romania',
+  ],
+}, {
+  title: 'Group 3',
+  description: 'Choose your top 3 from the countries from this group!',
+  countries: [
+    'Iceland',
+    'Malta',
+    'Germany',
+    'Israel',
+    'Australia',
+  ],
+}, {
+  title: 'Group 4',
+  description: 'Choose your top 3 from the countries from this group!',
+  countries: [
+    'The Netherlands',
+    'Georgia',
+    'Denmark',
+    'Belgium',
+    'Spain',
+  ],
+}, {
+  title: 'Group 5',
+  description: 'Choose your top 3 from the countries from this group!',
+  countries: [
+    'Greece',
+    'France',
+    'Poland',
+    'Armenia',
+    'Serbia',
+    'Finland',
+  ],
+}];
+
+groups.push({
+  title: 'Your overall favorites',
+  description: 'Choose your top 5 from all the countries!',
+  countries: [].concat(...groups.map(({ countries }) => countries)),
+});
 
 function PollView({ pollId }) {
   const db = useDatabase();
