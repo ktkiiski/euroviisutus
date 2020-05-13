@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import * as firebase from 'firebase/app';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'firebase/firestore';
@@ -16,9 +17,18 @@ firebase.initializeApp({
   appId: '1:535056031434:web:acbe1686d1028bf9155e33',
 });
 
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
