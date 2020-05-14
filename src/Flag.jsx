@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   flag: {
+    width: 24,
+    height: 24,
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     verticalAlign: 'middle',
