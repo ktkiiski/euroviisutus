@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, Button, FormGroup } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { usePollParticipants, useDatabase, identifyParticipant } from './data';
+import { useDatabase, identifyParticipant } from './data';
 import Layout from './Layout';
+import ParticipantList from './ParticipantList';
 
 function JoinView({ pollId }) {
   const history = useHistory();
   const db = useDatabase();
-  const participants = usePollParticipants(pollId) || [];
   const [name, setName] = useState(localStorage.getItem('participant') || '');
   const onNameChange = (event) => {
     setName(event.currentTarget.value);
@@ -51,11 +51,7 @@ function JoinView({ pollId }) {
           </Button>
         </FormGroup>
       </form>
-      <ul>
-        {participants.map((participant) => (
-          <li key={participant.id}>{participant.name}</li>
-        ))}
-      </ul>
+      <ParticipantList pollId={pollId} />
     </Layout>
   );
 }

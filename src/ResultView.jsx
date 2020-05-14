@@ -3,31 +3,12 @@ import PropTypes from 'prop-types';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import { CSSTransition } from 'react-transition-group';
-import { makeStyles } from '@material-ui/core';
 import Layout from './Layout';
 import { useFinalRankings } from './data';
 import Flag from './Flag';
-
-const transitionDuration = 700;
-const useStyles = makeStyles((theme) => ({
-  row: {
-    backgroundColor: theme.palette.background.paper,
-  },
-  enter: {
-    opacity: 0,
-    transform: 'translateX(-100%)',
-  },
-  enterActive: {
-    opacity: 1,
-    transform: 'translateX(0%)',
-    transition: `opacity ${transitionDuration}ms ease-out, transform ${transitionDuration}ms ease-out`,
-  },
-}));
+import TransitionTableRow from './TransitionTableRow';
 
 function ResultView({ pollId }) {
-  const styles = useStyles();
   const finalResults = useFinalRankings(pollId);
   const [displayIndex, setDisplayIndex] = useState(0);
   useEffect(() => {
@@ -38,29 +19,21 @@ function ResultView({ pollId }) {
   }, []);
   const countdown = finalResults ? finalResults.length - displayIndex : 0;
   const table = !finalResults ? null : (
-    <Table aria-label="simple table">
+    <Table>
       <TableBody>
         {finalResults.map(({ country, score }, index) => (
-          <CSSTransition
+          <TransitionTableRow
             key={country.id}
-            classNames={{
-              enter: styles.enter,
-              enterActive: styles.enterActive,
-            }}
             in={index >= countdown}
-            timeout={transitionDuration}
-            mountOnEnter
           >
-            <TableRow className={styles.row}>
-              <TableCell component="th" scope="row">
-                <Flag country={country} />
-                {country.name}
-              </TableCell>
-              <TableCell align="right">
-                {score}
-              </TableCell>
-            </TableRow>
-          </CSSTransition>
+            <TableCell component="th" scope="row">
+              <Flag country={country} />
+              {country.name}
+            </TableCell>
+            <TableCell align="right">
+              {score}
+            </TableCell>
+          </TransitionTableRow>
         ))}
       </TableBody>
     </Table>
