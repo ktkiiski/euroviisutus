@@ -14,3 +14,7 @@ export function usePollParticipants(pollId) {
   );
   return participants;
 }
+
+export function identifyParticipant(name) {
+  return name.trim().toLowerCase();
+}
