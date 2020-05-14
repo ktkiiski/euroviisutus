@@ -26,7 +26,7 @@ function JoinView({ pollId }) {
       name,
     });
     localStorage.setItem('participant', name);
-    history.push(`/poll/${pollId}`);
+    history.push(`/poll/${pollId}/0`);
   };
   return (
     <Layout

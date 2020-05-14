@@ -1,6 +1,6 @@
 import { useCollectionData, useDocumentData } from 'react-firebase-hooks/firestore';
 import firebase from 'firebase/app';
-import { useMemo } from 'react';
+import { useMemo, useCallback, useState } from 'react';
 import { groups, countries } from './countries';
 
 export function useDatabase() {
@@ -84,4 +84,17 @@ export function useFinalRankings(pollId) {
     }
     return 0;
   });
+}
+
+export function useHostStatus() {
+  const [isHost, setCachedIsHost] = useState(localStorage.getItem('host') === 'true');
+  const setIsHost = useCallback((isNowHost) => {
+    if (isNowHost) {
+      localStorage.setItem('host', 'true');
+    } else {
+      localStorage.removeItem('host');
+    }
+    setCachedIsHost(isNowHost);
+  }, []);
+  return [isHost, setIsHost];
 }

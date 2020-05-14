@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import * as firebase from 'firebase/app';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import purple from '@material-ui/core/colors/purple';
+import blue from '@material-ui/core/colors/blue';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'firebase/firestore';
@@ -20,6 +22,8 @@ firebase.initializeApp({
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
+    primary: blue,
+    secondary: purple,
   },
 });
 

@@ -9,6 +9,7 @@ import {
 import PollView from './PollView';
 import JoinView from './JoinView';
 import Layout from './Layout';
+import AdminView from './AdminView';
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           exact
           path="/poll/:pollId"
           render={({ match }) => (
-            <Redirect to={`/poll/${match.params.pollId}/0`} />
+            <Redirect to={`/poll/${match.params.pollId}/join`} />
           )}
         />
         <Route
@@ -36,6 +37,9 @@ function App() {
             />
           )}
         />
+        <Route exact path="/admin">
+          <AdminView />
+        </Route>
         <Route exact path="/">
           <Layout
             title="Eurovision"
