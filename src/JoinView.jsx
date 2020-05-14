@@ -8,7 +8,7 @@ import Layout from './Layout';
 function JoinView({ pollId }) {
   const history = useHistory();
   const db = useDatabase();
-  const participants = usePollParticipants(pollId);
+  const participants = usePollParticipants(pollId) || [];
   const [name, setName] = useState(localStorage.getItem('participant') || '');
   const onNameChange = (event) => {
     setName(event.currentTarget.value);
