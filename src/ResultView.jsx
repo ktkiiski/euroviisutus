@@ -8,6 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Layout from './Layout';
 import { useFinalRankings } from './data';
+import Flag from './Flag';
 
 function ResultView({ pollId }) {
   const finalResults = useFinalRankings(pollId);
@@ -18,6 +19,7 @@ function ResultView({ pollId }) {
           {finalResults.map(({ country, score }) => (
             <TableRow key={country.id}>
               <TableCell component="th" scope="row">
+                <Flag country={country} />
                 {country.name}
               </TableCell>
               <TableCell align="right">

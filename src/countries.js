@@ -1,5 +1,5 @@
 const AZERBAIJAN = { id: 'AZ', name: 'Azerbaijan' };
-const UNITED_KINGDOM = { id: 'UK', name: 'United Kingdom' };
+const UNITED_KINGDOM = { id: 'GB', name: 'United Kingdom' };
 const RUSSIA = { id: 'RU', name: 'Russia' };
 const SWITZERLAND = { id: 'CH', name: 'Switzerland' };
 const BULGARIA = { id: 'BG', name: 'Bulgaria' };
