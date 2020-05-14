@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import GroupView from './GroupView';
+import ResultView from './ResultView';
 
 const AZERBAIJAN = { id: 'AZ', name: 'Azerbaijan' };
 const UNITED_KINGDOM = { id: 'UK', name: 'United Kingdom' };
@@ -107,6 +108,12 @@ function PollView({ pollId }) {
     newVotes[groupIndex] = groupVotes;
     setVotes(newVotes);
   };
+  if (!group) {
+    // Completed!
+    return (
+      <ResultView />
+    );
+  }
   return (
     <GroupView
       {...group}

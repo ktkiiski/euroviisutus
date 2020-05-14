@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Container, TextField, Button } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { usePollParticipants, useDatabase, identifyParticipant } from './data';
+import Layout from './Layout';
 
 function JoinView({ pollId }) {
   const history = useHistory();
@@ -15,16 +16,23 @@ function JoinView({ pollId }) {
   const onSubmit = async (event) => {
     event.preventDefault();
     const participantId = identifyParticipant(name);
-    await db.collection('polls')
+    const participantRef = db.collection('polls')
       .doc(pollId)
       .collection('participants')
-      .doc(participantId)
-      .update({ name });
+      .doc(participantId);
+    const participantDoc = await participantRef.get();
+    await participantRef.set({
+      ...participantDoc.exists ? participantDoc.data() : null,
+      name,
+    });
     localStorage.setItem('participant', name);
     history.push(`/poll/${pollId}`);
   };
   return (
-    <Container maxWidth="sm">
+    <Layout
+      title="Join Eurovision"
+      description="Enter your name to participate!"
+    >
       <form onSubmit={onSubmit}>
         <div>
           <TextField
@@ -50,7 +58,7 @@ function JoinView({ pollId }) {
           <li key={participant.id}>{participant.name}</li>
         ))}
       </ul>
-    </Container>
+    </Layout>
   );
 }
 

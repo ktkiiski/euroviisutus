@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Container, Button, Typography, FormControl, InputLabel, NativeSelect, FormHelperText,
+  Button, FormControl, InputLabel, NativeSelect, FormHelperText,
 } from '@material-ui/core';
+import Layout from './Layout';
 
 let idCounter = 0;
 
@@ -18,11 +19,10 @@ function GroupView({
   };
   const isSubmitDisabled = points.some((_, index) => !votes[index]);
   return (
-    <Container maxWidth="sm">
-      <div>
-        <Typography variant="h2">{title}</Typography>
-        <Typography variant="body1">{description}</Typography>
-      </div>
+    <Layout
+      title={title}
+      description={description}
+    >
       {points.map((score, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <div key={index}>
@@ -51,7 +51,7 @@ function GroupView({
           I&apos;m ready
         </Button>
       </div>
-    </Container>
+    </Layout>
   );
 }
 

@@ -5,9 +5,9 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { Container, Typography } from '@material-ui/core';
 import PollView from './PollView';
 import JoinView from './JoinView';
+import Layout from './Layout';
 
 function App() {
   return (
@@ -24,12 +24,16 @@ function App() {
           render={({ match }) => <PollView pollId={match.params.pollId} />}
         />
         <Route exact path="/">
-          <h1>Welcome!</h1>
+          <Layout
+            title="Eurovision"
+            description="Contact your host and ask them for a link to your Eurovision party!"
+          />
         </Route>
         <Route path="*">
-          <Container>
-            <Typography>Page not found</Typography>
-          </Container>
+          <Layout
+            title="Not found"
+            description="The page was not found, check your URL."
+          />
         </Route>
       </Switch>
     </BrowserRouter>
