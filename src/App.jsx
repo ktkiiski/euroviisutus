@@ -4,6 +4,7 @@ import {
   BrowserRouter,
   Switch,
   Route,
+  Redirect,
 } from 'react-router-dom';
 import PollView from './PollView';
 import JoinView from './JoinView';
@@ -21,7 +22,19 @@ function App() {
         <Route
           exact
           path="/poll/:pollId"
-          render={({ match }) => <PollView pollId={match.params.pollId} />}
+          render={({ match }) => (
+            <Redirect to={`/poll/${match.params.pollId}/0`} />
+          )}
+        />
+        <Route
+          exact
+          path="/poll/:pollId/:groupIndex(\d+)"
+          render={({ match }) => (
+            <PollView
+              pollId={match.params.pollId}
+              groupIndex={parseInt(match.params.groupIndex, 10)}
+            />
+          )}
         />
         <Route exact path="/">
           <Layout

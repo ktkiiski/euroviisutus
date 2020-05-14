@@ -1,8 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory, Redirect } from 'react-router-dom';
 import GroupView from './GroupView';
 import ResultView from './ResultView';
+import { usePollParticipant, useCurrentParticipantId, usePollParticipantRef } from './data';
+import Layout from './Layout';
 
 const AZERBAIJAN = { id: 'AZ', name: 'Azerbaijan' };
 const UNITED_KINGDOM = { id: 'UK', name: 'United Kingdom' };
@@ -96,17 +99,40 @@ groups.push({
   countries: [].concat(...groups.map(({ countries }) => countries)),
 });
 
-function PollView({ pollId }) {
-  const [votes, setVotes] = useState(
-    () => groups.map((group) => group.points.map(() => null)),
+function PollView({ groupIndex, pollId }) {
+  const participantId = useCurrentParticipantId();
+  const participantRef = usePollParticipantRef(pollId, participantId);
+  const participant = usePollParticipant(pollId, participantId);
+  const [defaultVotes] = useState(
+    () => groups.map((group) => ({
+      votes: group.points.map(() => null),
+    })),
   );
-  console.log('TODO: PollView', pollId, votes);
-  const [groupIndex, setGroupIndex] = useState(0);
+  const history = useHistory();
+  if (!participantId && participant === null) {
+    return (
+      <Redirect to={`/poll/${pollId}/join`} />
+    );
+  }
+  if (!participant) {
+    return (
+      <Layout
+        title="Loading…"
+        description="Please wait for a moment."
+      />
+    );
+  }
+  const votes = participant.votes || defaultVotes;
   const group = groups[groupIndex];
   const onVotesChange = (groupVotes) => {
     const newVotes = votes.slice();
-    newVotes[groupIndex] = groupVotes;
-    setVotes(newVotes);
+    newVotes[groupIndex] = { votes: groupVotes };
+    participantRef.update({
+      votes: newVotes,
+    });
+  };
+  const onSubmit = () => {
+    history.push(`/poll/${pollId}/${groupIndex + 1}`);
   };
   if (!group) {
     // Completed!
@@ -117,14 +143,15 @@ function PollView({ pollId }) {
   return (
     <GroupView
       {...group}
-      votes={votes[groupIndex]}
+      votes={votes[groupIndex].votes}
       onVotesChange={onVotesChange}
-      onSubmit={() => setGroupIndex(groupIndex + 1)}
+      onSubmit={onSubmit}
     />
   );
 }
 
 PollView.propTypes = {
+  groupIndex: PropTypes.number.isRequired,
   pollId: PropTypes.string.isRequired,
 };
 
