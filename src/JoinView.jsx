@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { useDatabase, identifyParticipant } from './data';
 import Layout from './Layout';
 import ParticipantList from './ParticipantList';
+import ScrollToTop from './ScrollToTop';
 
 function JoinView({ pollId }) {
   const history = useHistory();
@@ -35,6 +36,7 @@ function JoinView({ pollId }) {
       title="Join Eurovision"
       description="Enter your name to participate!"
     >
+      <ScrollToTop />
       <Box component="form" onSubmit={onSubmit} my={2}>
         <FormGroup>
           <TextField

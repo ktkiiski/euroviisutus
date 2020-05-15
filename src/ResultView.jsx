@@ -13,6 +13,7 @@ import {
 import Flag from './Flag';
 import TransitionTableRow from './TransitionTableRow';
 import ParticipantList from './ParticipantList';
+import ScrollToTop from './ScrollToTop';
 
 function ResultView({ pollId }) {
   const finalResults = useFinalRankings(pollId);
@@ -98,6 +99,7 @@ function ResultView({ pollId }) {
           : 'The host will reveal the results below!'
       }
     >
+      <ScrollToTop />
       {controls}
       {table}
       {participantList}

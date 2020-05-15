@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button, FormControl, InputLabel, NativeSelect, FormHelperText, Box, Paper, FormGroup, Select, Typography,
+  Button, FormControl, InputLabel, FormHelperText, Box, Paper, FormGroup, Select, Typography,
 } from '@material-ui/core';
 import Layout from './Layout';
 import CountryList from './CountryList';
+import ScrollToTop from './ScrollToTop';
 
 let idCounter = 0;
 
@@ -24,6 +25,7 @@ function GroupView({
       title={title}
       description={description}
     >
+      <ScrollToTop key={title} />
       <Paper>
         <CountryList countries={countries} />
       </Paper>
