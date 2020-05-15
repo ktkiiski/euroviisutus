@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory, Redirect } from 'react-router-dom';
 import GroupView from './GroupView';
@@ -18,6 +18,14 @@ function PollView({ groupIndex, pollId }) {
     })),
   );
   const history = useHistory();
+  const votes = (participant && participant.votes) || defaultVotes;
+  const group = groups && groups[groupIndex];
+  const isReady = group == null;
+  useEffect(() => {
+    if (participant && participant.isReady !== isReady) {
+      participantRef.update({ isReady });
+    }
+  }, [participant, participantRef, isReady]);
   if (!participantId && participant === null) {
     return (
       <Redirect to={`/poll/${pollId}/join`} />
@@ -31,8 +39,6 @@ function PollView({ groupIndex, pollId }) {
       />
     );
   }
-  const votes = participant.votes || defaultVotes;
-  const group = groups[groupIndex];
   const onVotesChange = (groupVotes) => {
     const newVotes = votes.slice();
     newVotes[groupIndex] = { votes: groupVotes };

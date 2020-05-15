@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { TextField, Button, FormGroup } from '@material-ui/core';
+import {
+  TextField, Button, FormGroup, Box, Typography,
+} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useDatabase, identifyParticipant } from './data';
 import Layout from './Layout';
@@ -33,7 +35,7 @@ function JoinView({ pollId }) {
       title="Join Eurovision"
       description="Enter your name to participate!"
     >
-      <form onSubmit={onSubmit}>
+      <Box component="form" onSubmit={onSubmit} my={2}>
         <FormGroup>
           <TextField
             label="Your name"
@@ -50,8 +52,11 @@ function JoinView({ pollId }) {
             Join Eurovision!
           </Button>
         </FormGroup>
-      </form>
-      <ParticipantList pollId={pollId} />
+      </Box>
+      <Box my={2}>
+        <Typography variant="h6">Participants</Typography>
+        <ParticipantList pollId={pollId} />
+      </Box>
     </Layout>
   );
 }

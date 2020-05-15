@@ -43,8 +43,12 @@ function TransitionTableRow({ in: visible, children, ...props }) {
 }
 
 TransitionTableRow.propTypes = {
-  in: PropTypes.bool.isRequired,
+  in: PropTypes.bool,
   children: PropTypes.node.isRequired,
+};
+
+TransitionTableRow.defaultProps = {
+  in: true,
 };
 
 export default TransitionTableRow;

@@ -17,12 +17,15 @@ export function usePollParticipants(pollId) {
     // eslint-disable-next-line no-console
     console.error(error);
   }
-  return participants || (loading ? undefined : null);
+  return loading ? undefined : (participants || null);
 }
 
 export function usePollRef(pollId) {
   const db = useDatabase();
-  return pollId ? db.collection('polls').doc(pollId) : undefined;
+  return useMemo(
+    () => (pollId ? db.collection('polls').doc(pollId) : undefined),
+    [db, pollId],
+  );
 }
 
 export function usePoll(pollId) {
@@ -36,10 +39,12 @@ export function usePoll(pollId) {
 }
 
 export function usePollParticipantRef(pollId, participantId) {
-  const db = useDatabase();
-  return pollId && participantId
-    ? db.collection('polls').doc(pollId).collection('participants').doc(participantId)
-    : undefined;
+  const pollRef = usePollRef(pollId);
+  return useMemo(() => (
+    pollRef && participantId
+      ? pollRef.collection('participants').doc(participantId)
+      : undefined
+  ), [pollRef, participantId]);
 }
 
 export function usePollParticipant(pollId, participantId) {

@@ -3,13 +3,16 @@ import PropTypes from 'prop-types';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import { FormGroup, Button, Box } from '@material-ui/core';
+import {
+  FormGroup, Button, Box, Typography,
+} from '@material-ui/core';
 import Layout from './Layout';
 import {
   useFinalRankings, useHostStatus, usePoll, usePollRef,
 } from './data';
 import Flag from './Flag';
 import TransitionTableRow from './TransitionTableRow';
+import ParticipantList from './ParticipantList';
 
 function ResultView({ pollId }) {
   const finalResults = useFinalRankings(pollId);
@@ -80,6 +83,12 @@ function ResultView({ pollId }) {
       </Table>
     </Box>
   );
+  const participantList = revealCount != null ? null : (
+    <>
+      <Typography variant="h6">Participants</Typography>
+      <ParticipantList pollId={pollId} />
+    </>
+  );
   return (
     <Layout
       title="Results"
@@ -91,6 +100,7 @@ function ResultView({ pollId }) {
     >
       {controls}
       {table}
+      {participantList}
     </Layout>
   );
 }
