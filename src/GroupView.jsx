@@ -78,7 +78,7 @@ function GroupView({
 GroupView.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  countries: PropTypes.arrayOf(PropTypes.exact({
+  countries: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   })).isRequired,
