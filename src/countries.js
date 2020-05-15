@@ -156,8 +156,8 @@ const FINLAND = {
 };
 
 const groups = [{
-  title: 'Group 1',
-  description: 'Choose your top 3 from the countries from this group!',
+  title: 'Group 1/5',
+  description: "Let's watch the videos in group 1 together. Then choose your top 3 songs this group!",
   points: [12, 10, 8],
   countries: [
     AZERBAIJAN,
@@ -167,8 +167,8 @@ const groups = [{
     BULGARIA,
   ],
 }, {
-  title: 'Group 2',
-  description: 'Choose your top 3 from the countries from this group!',
+  title: 'Group 2/5',
+  description: "Let's watch the videos in group 2 together. Then choose your top 3 songs this group!",
   points: [12, 10, 8],
   countries: [
     ITALY,
@@ -178,8 +178,8 @@ const groups = [{
     ROMANIA,
   ],
 }, {
-  title: 'Group 3',
-  description: 'Choose your top 3 from the countries from this group!',
+  title: 'Group 3/5',
+  description: "Let's watch the videos in group 3 together. Then choose your top 3 songs this group!",
   points: [12, 10, 8],
   countries: [
     ICELAND,
@@ -189,8 +189,8 @@ const groups = [{
     AUSTRALIA,
   ],
 }, {
-  title: 'Group 4',
-  description: 'Choose your top 3 from the countries from this group!',
+  title: 'Group 4/5',
+  description: "Let's watch the videos in group 4 together. Then choose your top 3 songs this group!",
   points: [12, 10, 8],
   countries: [
     NETHERLANDS,
@@ -200,8 +200,8 @@ const groups = [{
     SPAIN,
   ],
 }, {
-  title: 'Group 5',
-  description: 'Choose your top 3 from the countries from this group!',
+  title: 'Group 5/5',
+  description: "Let's watch the videos in group 5 together. Then choose your top 3 songs this group!",
   points: [12, 10, 8],
   countries: [
     GREECE,
@@ -217,7 +217,7 @@ const countries = [].concat(...groups.map((group) => group.countries));
 
 groups.push({
   title: 'Your overall favorites',
-  description: 'Choose your top 5 from all the countries!',
+  description: 'Finally, choose your top 5 from all the songs from all the previous groups!',
   points: [12, 10, 8, 6, 4],
   countries,
 });

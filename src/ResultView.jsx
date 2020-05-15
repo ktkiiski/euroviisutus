@@ -95,8 +95,8 @@ function ResultView({ pollId }) {
       title="Results"
       description={
         revealCount == null
-          ? 'Waiting for other participants…'
-          : 'The host will reveal the results below!'
+          ? 'Now relax and wait for other participants to vote! Your host will then reveal the results!'
+          : 'Time for the final results! The host will reveal the results below, starting from the last position!'
       }
     >
       <ScrollToTop />

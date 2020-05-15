@@ -34,13 +34,13 @@ function JoinView({ pollId }) {
   return (
     <Layout
       title="Join Eurovision"
-      description="Enter your name to participate!"
+      description="Welcome to the Eurovision Song Contest 2020 party event to vote for your favorite songs! Join by entering your unique nickname below and hitting the joins button!"
     >
       <ScrollToTop />
       <Box component="form" onSubmit={onSubmit} my={2}>
         <FormGroup>
           <TextField
-            label="Your name"
+            label="Your nickname"
             variant="filled"
             value={name}
             onChange={onNameChange}
