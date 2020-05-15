@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Typography } from '@material-ui/core';
+import { Container, Typography, Box } from '@material-ui/core';
 
 function Layout({ title, description, children }) {
   return (
     <Container maxWidth="sm">
-      <div>
-        <Typography variant="h2">{title}</Typography>
+      <Typography variant="h2">{title}</Typography>
+      <Box my={3}>
         <Typography variant="body1">{description}</Typography>
-      </div>
-      <div>
+      </Box>
+      <Box>
         {children}
-      </div>
+      </Box>
     </Container>
   );
 }

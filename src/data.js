@@ -20,6 +20,21 @@ export function usePollParticipants(pollId) {
   return participants || (loading ? undefined : null);
 }
 
+export function usePollRef(pollId) {
+  const db = useDatabase();
+  return pollId ? db.collection('polls').doc(pollId) : undefined;
+}
+
+export function usePoll(pollId) {
+  const pollRef = usePollRef(pollId);
+  const [poll, loading, error] = useDocumentData(pollRef, { idField: 'id' });
+  if (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
+  return poll || (loading ? undefined : null);
+}
+
 export function usePollParticipantRef(pollId, participantId) {
   const db = useDatabase();
   return pollId && participantId

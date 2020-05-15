@@ -30,6 +30,8 @@ function TransitionTableRow({ in: visible, children, ...props }) {
       in={visible}
       timeout={transitionDuration}
       mountOnEnter
+      unmountOnExit
+      exit={false}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
