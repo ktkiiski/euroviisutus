@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button, FormControl, InputLabel, NativeSelect, FormHelperText,
+  Button, FormControl, InputLabel, NativeSelect, FormHelperText, Box, Paper, FormGroup, Select, Typography,
 } from '@material-ui/core';
 import Layout from './Layout';
+import CountryList from './CountryList';
 
 let idCounter = 0;
 
@@ -23,34 +24,53 @@ function GroupView({
       title={title}
       description={description}
     >
-      {points.map((score, index) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <div key={index}>
-          <FormControl>
-            <InputLabel htmlFor={`vote-${uniqueId}-${index}`}>
-              {`${index + 1}th favorite`}
-            </InputLabel>
-            <NativeSelect
-              value={votes[index] || ''}
-              onChange={(event) => onVoteChange(index, event.currentTarget.value)}
-              inputProps={{
-                id: `vote-${uniqueId}-${index}`,
-              }}
-            >
-              {votes[index] ? null : (<option aria-label="None" value="" />)}
-              {countries.map((country) => (
-                <option key={country.id} value={country.id}>{country.name}</option>
-              ))}
-            </NativeSelect>
-            <FormHelperText>{`${score} points`}</FormHelperText>
-          </FormControl>
-        </div>
-      ))}
-      <div>
-        <Button type="button" onClick={onSubmit} disabled={isSubmitDisabled}>
-          I&apos;m ready
-        </Button>
-      </div>
+      <Paper>
+        <CountryList countries={countries} />
+      </Paper>
+      <Box my={2}>
+        <Typography variant="h6">Your votes</Typography>
+      </Box>
+      <Box my={2}>
+        {points.map((score, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Box key={index} my={2}>
+            <FormGroup>
+              <FormControl variant="filled">
+                <InputLabel htmlFor={`vote-${uniqueId}-${index}`}>
+                  {`${index + 1}th favorite`}
+                </InputLabel>
+                <Select
+                  native
+                  value={votes[index] || ''}
+                  onChange={(event) => onVoteChange(index, event.currentTarget.value)}
+                  inputProps={{
+                    id: `vote-${uniqueId}-${index}`,
+                  }}
+                >
+                  {votes[index] ? null : (<option aria-label="None" value="" />)}
+                  {countries.map((country) => (
+                    <option key={country.id} value={country.id}>{country.name}</option>
+                  ))}
+                </Select>
+                <FormHelperText>{`${score} points`}</FormHelperText>
+              </FormControl>
+            </FormGroup>
+          </Box>
+        ))}
+      </Box>
+      <Box mt={2} mb={4}>
+        <FormGroup>
+          <Button
+            type="button"
+            onClick={onSubmit}
+            disabled={isSubmitDisabled}
+            variant="contained"
+            color="primary"
+          >
+            I&apos;m ready
+          </Button>
+        </FormGroup>
+      </Box>
     </Layout>
   );
 }
