@@ -7,6 +7,7 @@ const transitionDuration = 700;
 const useStyles = makeStyles((theme) => ({
   row: {
     backgroundColor: theme.palette.background.paper,
+    textDecoration: 'none',
   },
   enter: {
     opacity: 0,

@@ -69,6 +69,10 @@ function ResultView({ pollId }) {
             <TransitionTableRow
               key={country.id}
               in={index >= countdown}
+              hover
+              component="a"
+              href={country.videoUrl}
+              target="eurovision_song"
             >
               <TableCell component="th" scope="row">
                 {`${index + 1}. `}
