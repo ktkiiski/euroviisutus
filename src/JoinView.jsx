@@ -8,6 +8,7 @@ import { useDatabase, identifyParticipant } from './data';
 import Layout from './Layout';
 import ParticipantList from './ParticipantList';
 import ScrollToTop from './ScrollToTop';
+import coverImageUrl from './eurovision.jpg';
 
 function JoinView({ pollId }) {
   const history = useHistory();
@@ -33,6 +34,7 @@ function JoinView({ pollId }) {
   };
   return (
     <Layout
+      coverImageUrl={coverImageUrl}
       title="Join Eurovision"
       description="Welcome to the Eurovision Song Contest 2020 party event to vote for your favorite songs! Join by entering your unique nickname below and hitting the joins button!"
     >

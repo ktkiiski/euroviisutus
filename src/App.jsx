@@ -10,6 +10,7 @@ import PollView from './PollView';
 import JoinView from './JoinView';
 import Layout from './Layout';
 import AdminView from './AdminView';
+import coverImageUrl from './eurovision.jpg';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         </Route>
         <Route exact path="/">
           <Layout
+            coverImageUrl={coverImageUrl}
             title="Eurovision"
             description="Contact your host and ask them for a link to your Eurovision party!"
           />
