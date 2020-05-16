@@ -70,7 +70,7 @@ export function useCurrentParticipantId() {
   return name && identifyParticipant(name);
 }
 
-function getCountryScore(participants, countryId) {
+export function getCountryScore(participants, countryId) {
   let score = 0;
   groups.forEach(({ points }, groupIndex) => {
     participants.forEach(({ votes }) => {

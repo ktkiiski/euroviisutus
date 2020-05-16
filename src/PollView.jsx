@@ -58,6 +58,8 @@ function PollView({ groupIndex, pollId }) {
   return (
     <GroupView
       {...group}
+      pollId={pollId}
+      participantId={participantId}
       votes={votes[groupIndex].votes}
       onVotesChange={onVotesChange}
       onSubmit={onSubmit}

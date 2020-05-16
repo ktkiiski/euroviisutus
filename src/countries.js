@@ -217,7 +217,7 @@ const countries = [].concat(...groups.map((group) => group.countries));
 
 groups.push({
   title: 'Your overall favorites',
-  description: 'Finally, choose your top 5 from all the songs from all the previous groups!',
+  description: 'Finally, choose your top 5 from all the songs from all the previous groups! You can see your personal total score for each country on the right.',
   points: [12, 10, 8, 6, 4],
   countries,
 });

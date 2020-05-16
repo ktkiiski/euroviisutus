@@ -10,6 +10,7 @@ import ScrollToTop from './ScrollToTop';
 let idCounter = 0;
 
 function GroupView({
+  pollId, participantId,
   title, description, countries, points, votes, onVotesChange, onSubmit,
 }) {
   // eslint-disable-next-line no-plusplus
@@ -27,7 +28,7 @@ function GroupView({
     >
       <ScrollToTop key={title} />
       <Paper>
-        <CountryList countries={countries} />
+        <CountryList pollId={pollId} participantId={participantId} countries={countries} />
       </Paper>
       <Box my={2}>
         <Typography variant="h6">Your votes</Typography>
@@ -78,6 +79,8 @@ function GroupView({
 }
 
 GroupView.propTypes = {
+  pollId: PropTypes.string.isRequired,
+  participantId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   countries: PropTypes.arrayOf(PropTypes.shape({
