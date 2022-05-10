@@ -1,2 +1,15 @@
 .container {
 }
+.list {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.item {
+  position: relative;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 8px 12px;
+  border: 1px solid gray;
+  touch-action: manipulation;
+}
