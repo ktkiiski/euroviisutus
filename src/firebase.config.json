@@ -1,0 +1,10 @@
+{
+  "projectId": "euroviisutus",
+  "appId": "1:535056031434:web:acbe1686d1028bf9155e33",
+  "databaseURL": "https://euroviisutus.firebaseio.com",
+  "storageBucket": "euroviisutus.appspot.com",
+  "locationId": "europe-west",
+  "apiKey": "AIzaSyDIRK1lcVM_SRov9SHYVkBLLkrUQm5DTe8",
+  "authDomain": "euroviisutus.firebaseapp.com",
+  "messagingSenderId": "535056031434"
+}
