@@ -1,4 +1,6 @@
+import ParticipantList from '../participants/ParticipantList';
 import ParticipantNameForm from '../participants/ParticipantNameForm';
+import ParticipantStatus from '../participants/ParticipantStatus';
 import useMyParticipant from '../participants/useMyParticipant';
 import VoteView from '../voting/VoteView';
 import usePoll from './usePoll';
@@ -20,18 +22,28 @@ export default function PollView({ pollId }: PollViewProps) {
           setMyParticipant({
             name,
             votes: [],
+            ready: false,
           });
         }}
       />
     );
   }
   return (
-    <VoteView
-      poll={poll}
-      votes={myParticipant.votes}
-      onVotesChange={(votes) => {
-        setMyParticipant({ ...myParticipant, votes });
-      }}
-    />
+    <>
+      <VoteView
+        poll={poll}
+        votes={myParticipant.votes}
+        onVotesChange={(votes) => {
+          setMyParticipant({ ...myParticipant, votes });
+        }}
+      />
+      <ParticipantStatus
+        ready={myParticipant.ready}
+        onChange={(ready) => {
+          setMyParticipant({ ...myParticipant, ready });
+        }}
+      />
+      <ParticipantList pollId={pollId} />
+    </>
   );
 }
