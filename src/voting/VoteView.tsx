@@ -1,20 +1,18 @@
 import useContest from '../contest/useContest';
-import CountryLabel from '../countries/CountryLabel';
-import Poll from '../polls/Poll';
+import ContestantItem from '../contestants/ContestantItem';
 import Sortable from '../utils/Sortable';
 import Vote from './Vote';
 import styles from './VoteView.module.css';
 
 interface VoteViewProps {
-  poll: Poll;
+  contestId: string;
+  voteOptions: number[];
   votes: Vote[];
   onVotesChange: (votes: Vote[]) => void;
 }
 
-const voteOptions = [12, 10, 8, 6, 4];
-
-export default function VoteView({ poll, votes, onVotesChange }: VoteViewProps) {
-  const contest = useContest(poll.contestId);
+export default function VoteView({ contestId, votes, voteOptions, onVotesChange }: VoteViewProps) {
+  const contest = useContest(contestId);
   const { contestants } = contest;
   const contestantCodes = contestants.map((contestant) => contestant.code);
   const voteCodes = votes.map((vote) => vote.code).filter((code) => code != null) as string[];
@@ -32,13 +30,7 @@ export default function VoteView({ poll, votes, onVotesChange }: VoteViewProps) 
           {(code, index) => {
             const voteValue: number | undefined = voteOptions[index];
             const contestant = contestants.find((c) => c.code === code)!;
-            return (
-              <div className={styles.item}>
-                {`#${contestant.draw} `}
-                <CountryLabel code={contestant.code} />
-                {voteValue != null && <span>{` ${voteValue}pt`}</span>}
-              </div>
-            );
+            return <ContestantItem contestant={contestant} score={voteValue} />;
           }}
         </Sortable>
       </div>
