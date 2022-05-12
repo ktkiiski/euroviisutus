@@ -18,7 +18,7 @@ export default function VoteView({ contestId, votes, voteOptions, onVotesChange 
   const voteCodes = votes.map((vote) => vote.code).filter((code) => code != null) as string[];
   const items = [...voteCodes, ...contestantCodes.filter((code) => !voteCodes.includes(code))];
   return (
-    <div className={styles.container}>
+    <>
       <h3>{contest.id}</h3>
       <div className={styles.list}>
         <Sortable
@@ -34,6 +34,6 @@ export default function VoteView({ contestId, votes, voteOptions, onVotesChange 
           }}
         </Sortable>
       </div>
-    </div>
+    </>
   );
 }

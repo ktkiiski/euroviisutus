@@ -1,11 +1,14 @@
-.container {
-}
 .list {
+  align-self: stretch;
   display: flex;
   flex-direction: column;
   position: relative;
 }
 .item {
   box-sizing: border-box;
+  padding-bottom: 4px;
   transition: transform 500ms ease-in-out;
+}
+.controls {
+  margin-top: 10px;
 }

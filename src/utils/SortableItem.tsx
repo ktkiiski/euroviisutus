@@ -1,6 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { ReactNode } from 'react';
+import styles from './SortableItem.module.css';
 
 interface SortableItemProps {
   id: string;
@@ -8,7 +9,7 @@ interface SortableItemProps {
 }
 
 export default function SortableItem({ id, children }: SortableItemProps) {
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -16,7 +17,13 @@ export default function SortableItem({ id, children }: SortableItemProps) {
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div
+      ref={setNodeRef}
+      className={isDragging ? styles.dragging : styles.idle}
+      style={style}
+      {...attributes}
+      {...listeners}
+    >
       {children}
     </div>
   );

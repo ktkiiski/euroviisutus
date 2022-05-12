@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
+import styles from './App.module.css';
 import PollCreateForm from './polls/PollCreateForm';
 import PollView from './polls/PollView';
 
@@ -22,13 +23,15 @@ function NotFoundRoute() {
 export default function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>Loading…</div>}>
-        <Routes>
-          <Route path="/polls/:pollId" element={<PollRoute />} />
-          <Route path="/" element={<HomeRoute />} />
-          <Route path="*" element={<NotFoundRoute />} />
-        </Routes>
-      </Suspense>
+      <div className={styles.container}>
+        <Suspense fallback={<div>Loading…</div>}>
+          <Routes>
+            <Route path="/polls/:pollId" element={<PollRoute />} />
+            <Route path="/" element={<HomeRoute />} />
+            <Route path="*" element={<NotFoundRoute />} />
+          </Routes>
+        </Suspense>
+      </div>
     </BrowserRouter>
   );
 }

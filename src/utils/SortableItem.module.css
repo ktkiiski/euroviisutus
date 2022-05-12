@@ -1,0 +1,6 @@
+.idle {
+  cursor: grab;
+}
+.dragging {
+  opacity: 0.3;
+}

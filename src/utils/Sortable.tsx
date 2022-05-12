@@ -49,20 +49,11 @@ export default function Sortable({ items, onSort, children: renderItem }: Sortab
       modifiers={sortModifiers}
     >
       <SortableContext items={localItems} strategy={verticalListSortingStrategy}>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            background: '#eee',
-            padding: '2rem',
-          }}
-        >
-          {localItems.map((id, index) => (
-            <SortableItem key={id} id={id}>
-              {renderItem(id, index)}
-            </SortableItem>
-          ))}
-        </div>
+        {localItems.map((id, index) => (
+          <SortableItem key={id} id={id}>
+            {renderItem(id, index)}
+          </SortableItem>
+        ))}
       </SortableContext>
       <DragOverlay>{activeId ? renderItem(activeId, localItems.indexOf(activeId)) : null}</DragOverlay>
     </DndContext>

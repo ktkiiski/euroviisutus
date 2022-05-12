@@ -1,7 +1,6 @@
-.container {
-}
 .list {
+  align-self: stretch;
   display: flex;
   flex-direction: column;
-  position: relative;
+  gap: 4px;
 }

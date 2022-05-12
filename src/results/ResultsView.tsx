@@ -44,7 +44,7 @@ export default function ResultsView({
   });
   const sortedResults = sort(unsortedResults, ({ score }) => (score == null ? Infinity : -score));
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.list}>
         {unsortedResults.map((result, originalIndex) => {
           const { contestant, score } = result;
@@ -73,6 +73,6 @@ export default function ResultsView({
           Show next
         </button>
       </div>
-    </div>
+    </>
   );
 }
