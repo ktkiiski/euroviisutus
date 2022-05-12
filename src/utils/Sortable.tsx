@@ -15,7 +15,7 @@ import SortableItem from './SortableItem';
 interface SortableProps<ID> {
   items: ID[];
   onSort: (items: ID[]) => void;
-  children: (item: ID, index: number) => JSX.Element;
+  children: (item: ID, index: number, overlay: boolean) => JSX.Element;
 }
 
 const sortModifiers = [restrictToVerticalAxis];
@@ -51,11 +51,11 @@ export default function Sortable({ items, onSort, children: renderItem }: Sortab
       <SortableContext items={localItems} strategy={verticalListSortingStrategy}>
         {localItems.map((id, index) => (
           <SortableItem key={id} id={id}>
-            {renderItem(id, index)}
+            {renderItem(id, index, false)}
           </SortableItem>
         ))}
       </SortableContext>
-      <DragOverlay>{activeId ? renderItem(activeId, localItems.indexOf(activeId)) : null}</DragOverlay>
+      <DragOverlay>{activeId ? renderItem(activeId, localItems.indexOf(activeId), true) : null}</DragOverlay>
     </DndContext>
   );
 }

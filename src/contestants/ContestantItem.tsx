@@ -14,7 +14,7 @@ interface ContestantItemProps {
 export default function ContestantItem({ className, contestant, score, style }: ContestantItemProps) {
   return (
     <div className={classNames(styles.item, className)} style={style}>
-      <div className={styles.draw}>{`#${contestant.draw} `}</div>
+      <div className={styles.draw}>{String(contestant.draw).padStart(2, '0')}</div>
       <div className={styles.label}>
         <CountryLabel code={contestant.code} />
       </div>

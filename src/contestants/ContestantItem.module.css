@@ -11,10 +11,14 @@
   border: 1px solid gray;
   touch-action: manipulation;
   backdrop-filter: blur(3px);
+  text-transform: uppercase;
 }
 .draw {
+  display: block;
+  width: 2em;
   margin-right: 10px;
   flex-shrink: 0;
+  text-align: center;
 }
 .label {
   flex-shrink: 1;

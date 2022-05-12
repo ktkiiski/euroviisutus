@@ -27,10 +27,10 @@ export default function VoteView({ contestId, votes, voteOptions, onVotesChange 
             onVotesChange(sortedCodes.map((code) => ({ code })));
           }}
         >
-          {(code, index) => {
+          {(code, index, overlay) => {
             const voteValue: number | undefined = voteOptions[index];
             const contestant = contestants.find((c) => c.code === code)!;
-            return <ContestantItem contestant={contestant} score={voteValue} />;
+            return <ContestantItem contestant={contestant} score={overlay ? null : voteValue} />;
           }}
         </Sortable>
       </div>
