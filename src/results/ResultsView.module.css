@@ -1,4 +1,11 @@
 .container {
 }
 .list {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.item {
+  box-sizing: border-box;
+  transition: transform 500ms ease-in-out;
 }

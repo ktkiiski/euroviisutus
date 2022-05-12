@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+import { CSSProperties } from 'react';
 import CountryLabel from '../countries/CountryLabel';
 import Contestant from './Contestant';
 import styles from './ContestantItem.module.css';
@@ -5,11 +7,13 @@ import styles from './ContestantItem.module.css';
 interface ContestantItemProps {
   contestant: Contestant;
   score?: number | null;
+  className?: string;
+  style?: CSSProperties;
 }
 
-export default function ContestantItem({ contestant, score }: ContestantItemProps) {
+export default function ContestantItem({ className, contestant, score, style }: ContestantItemProps) {
   return (
-    <div className={styles.item}>
+    <div className={classNames(styles.item, className)} style={style}>
       <div className={styles.draw}>{`#${contestant.draw} `}</div>
       <div className={styles.label}>
         <CountryLabel code={contestant.code} />

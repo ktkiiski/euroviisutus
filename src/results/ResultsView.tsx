@@ -1,4 +1,5 @@
 import { sort } from 'immuton';
+import { CSSProperties } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import useContest from '../contest/useContest';
 import ContestantItem from '../contestants/ContestantItem';
@@ -45,9 +46,20 @@ export default function ResultsView({
   return (
     <div className={styles.container}>
       <div className={styles.list}>
-        {sortedResults.map(({ contestant, score }) => (
-          <ContestantItem key={contestant.code} contestant={contestant} score={score} />
-        ))}
+        {unsortedResults.map((result, originalIndex) => {
+          const { contestant, score } = result;
+          const sortedIndex = sortedResults.indexOf(result);
+          const indexOffset = sortedIndex - originalIndex;
+          const style: CSSProperties = {
+            transform: `translateY(${indexOffset * 100}%)`,
+            zIndex: originalIndex === minIndex ? 1 : 0,
+          };
+          return (
+            <div className={styles.item} style={style}>
+              <ContestantItem key={contestant.code} contestant={contestant} score={score} />
+            </div>
+          );
+        })}
       </div>
       <div>
         <button type="button" onClick={() => onRevealCountChange(revealCount <= 0 ? null : revealCount - 1)}>
