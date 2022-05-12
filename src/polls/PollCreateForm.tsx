@@ -1,8 +1,11 @@
+import { Button } from '@mui/material';
 import { addDoc, collection } from 'firebase/firestore';
 import { FormEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
 import contests from '../contest/contests';
 import { db } from '../firebase';
+import Logo from '../ui/Logo';
+import Title from '../ui/Title';
 import Poll from './Poll';
 import pollConverter from './pollConverter';
 
@@ -23,8 +26,14 @@ export default function PollCreateForm() {
     navigate(`/polls/${encodeURIComponent(pollId)}`);
   };
   return (
-    <form onSubmit={onSubmit}>
-      <button type="submit">Start event</button>
-    </form>
+    <>
+      <Logo />
+      <Title>Welcome!</Title>
+      <form onSubmit={onSubmit}>
+        <Button type="submit" variant="contained">
+          Start event
+        </Button>
+      </form>
+    </>
   );
 }

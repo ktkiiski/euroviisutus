@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import pollConverter from './pollConverter';
@@ -13,9 +14,9 @@ export default function PollCompletionButton({ pollId }: PollCompletionButtonPro
   };
   return (
     <div>
-      <button type="button" onClick={onCloseVoting}>
+      <Button type="button" variant="contained" onClick={onCloseVoting}>
         Close voting
-      </button>
+      </Button>
     </div>
   );
 }

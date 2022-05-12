@@ -1,7 +1,12 @@
 .container {
+  margin: 0 auto;
   min-height: 100vh;
+  max-width: 500px;
   padding: 24px 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Audiowide', cursive;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

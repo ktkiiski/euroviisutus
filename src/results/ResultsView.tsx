@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import { sort } from 'immuton';
 import { CSSProperties } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -61,17 +62,22 @@ export default function ResultsView({
           );
         })}
       </div>
-      <div>
-        <button type="button" onClick={() => onRevealCountChange(revealCount <= 0 ? null : revealCount - 1)}>
-          «
-        </button>
-        <button
+      <div className={styles.controls}>
+        <Button
           type="button"
+          variant="contained"
+          onClick={() => onRevealCountChange(revealCount <= 0 ? null : revealCount - 1)}
+        >
+          Back
+        </Button>
+        <Button
+          type="button"
+          variant="contained"
           onClick={() => onRevealCountChange(revealCount + 1)}
           disabled={revealCount >= contestants.length}
         >
           Show next
-        </button>
+        </Button>
       </div>
     </>
   );

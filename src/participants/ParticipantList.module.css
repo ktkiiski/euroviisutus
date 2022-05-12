@@ -1,4 +1,9 @@
 .list {
-}
-.listItem {
+  margin: 12px 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
 }

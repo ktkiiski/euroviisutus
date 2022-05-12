@@ -1,3 +1,4 @@
+import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import styles from './ParticipantNameForm.module.css';
 
@@ -10,7 +11,7 @@ export default function ParticipantNameForm({ onSubmit }: ParticipantNameFormPro
   const isValid = /\S/.test(name);
   return (
     <form
-      className={styles.container}
+      className={styles.form}
       onSubmit={(event) => {
         event.preventDefault();
         if (isValid) {
@@ -18,11 +19,17 @@ export default function ParticipantNameForm({ onSubmit }: ParticipantNameFormPro
         }
       }}
     >
-      <p>Please enter your name:</p>
-      <input type="text" value={name} onChange={(event) => setName(event.currentTarget.value)} />
-      <button type="submit" disabled={!isValid}>
-        OK
-      </button>
+      <p>Please enter your name to join the event.</p>
+      <TextField
+        label="Your name"
+        variant="filled"
+        type="text"
+        value={name}
+        onChange={(event) => setName(event.currentTarget.value)}
+      />
+      <Button type="submit" disabled={!isValid} variant="contained">
+        Join
+      </Button>
     </form>
   );
 }

@@ -1,3 +1,4 @@
+import { Checkbox, FormControlLabel } from '@mui/material';
 import styles from './ParticipantStatus.module.css';
 
 interface ParticipantStatusProps {
@@ -8,8 +9,10 @@ interface ParticipantStatusProps {
 export default function ParticipantStatus({ ready, onChange }: ParticipantStatusProps) {
   return (
     <div className={styles.status}>
-      <input type="checkbox" checked={ready} onChange={(event) => onChange(event.currentTarget.checked)} />
-      <span>{`I'm ready`}</span>
+      <FormControlLabel
+        control={<Checkbox checked={ready} onChange={(event) => onChange(event.currentTarget.checked)} />}
+        label="I'm ready!"
+      />
     </div>
   );
 }
