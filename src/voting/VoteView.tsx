@@ -1,22 +1,21 @@
+import { union } from 'immuton';
 import useContest from '../contest/useContest';
 import ContestantItem from '../contestants/ContestantItem';
 import Sortable from '../utils/Sortable';
-import Vote from './Vote';
 import styles from './VoteView.module.css';
 
 interface VoteViewProps {
   contestId: string;
   voteOptions: number[];
-  votes: Vote[];
-  onVotesChange: (votes: Vote[]) => void;
+  votes: string[];
+  onVotesChange: (votes: string[]) => void;
 }
 
 export default function VoteView({ contestId, votes, voteOptions, onVotesChange }: VoteViewProps) {
   const contest = useContest(contestId);
   const { contestants } = contest;
   const contestantCodes = contestants.map((contestant) => contestant.code);
-  const voteCodes = votes.map((vote) => vote.code).filter((code) => code != null) as string[];
-  const items = [...voteCodes, ...contestantCodes.filter((code) => !voteCodes.includes(code))];
+  const items = union([votes, contestantCodes]);
   return (
     <>
       <h3>{contest.id}</h3>
@@ -24,7 +23,7 @@ export default function VoteView({ contestId, votes, voteOptions, onVotesChange 
         <Sortable
           items={items}
           onSort={(sortedCodes) => {
-            onVotesChange(sortedCodes.map((code) => ({ code })));
+            onVotesChange(sortedCodes);
           }}
         >
           {(code, index, overlay) => {

@@ -18,7 +18,7 @@ interface ResultsViewProps {
 function getContestantScore(code: string, participants: Participant[], voteOptions: number[]) {
   return participants.reduce((sum, { votes, ready }) => {
     if (!ready) return sum;
-    const codeIndex = votes.findIndex((vote) => vote.code === code);
+    const codeIndex = votes.indexOf(code);
     const score = voteOptions[codeIndex] ?? 0;
     return sum + score;
   }, 0);
