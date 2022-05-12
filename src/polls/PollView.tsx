@@ -5,6 +5,7 @@ import ParticipantNameForm from '../participants/ParticipantNameForm';
 import ParticipantStatus from '../participants/ParticipantStatus';
 import useMyParticipant from '../participants/useMyParticipant';
 import ResultsView from '../results/ResultsView';
+import Loading from '../ui/Loading';
 import VoteView from '../voting/VoteView';
 import PollCompletionButton from './PollCompletionButton';
 import usePollRef from './usePollRef';
@@ -18,7 +19,7 @@ export default function PollView({ pollId }: PollViewProps) {
   const [poll] = useDocumentData(pollRef);
   const [myParticipant, loadingMyParticipant, setMyParticipant] = useMyParticipant(pollId);
   if (!poll || (!myParticipant && loadingMyParticipant)) {
-    return <div>Loading…</div>;
+    return <Loading />;
   }
   if (!myParticipant) {
     return (

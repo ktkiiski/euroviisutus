@@ -6,6 +6,7 @@ import styles from './App.module.css';
 import PollCreateForm from './polls/PollCreateForm';
 import PollView from './polls/PollView';
 import theme from './theme';
+import Loading from './ui/Loading';
 
 function PollRoute() {
   const { pollId } = useParams();
@@ -29,7 +30,7 @@ export default function App() {
       <BrowserRouter>
         <CssBaseline />
         <div className={styles.container}>
-          <Suspense fallback={<div>Loading…</div>}>
+          <Suspense fallback={<Loading />}>
             <Routes>
               <Route path="/polls/:pollId" element={<PollRoute />} />
               <Route path="/" element={<HomeRoute />} />
