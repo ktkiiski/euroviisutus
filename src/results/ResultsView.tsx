@@ -63,7 +63,12 @@ export default function ResultsView({
           };
           return (
             <div className={styles.item} style={style} key={result.contestant.code}>
-              <ContestantItem key={contestant.code} contestant={contestant} score={score} />
+              <ContestantItem
+                key={contestant.code}
+                contestant={contestant}
+                score={score}
+                highlight={originalIndex === minIndex}
+              />
             </div>
           );
         })}

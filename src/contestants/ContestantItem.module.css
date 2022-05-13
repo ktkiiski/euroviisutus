@@ -17,6 +17,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.highlight {
+  background-color: rgba(28, 51, 98, 0.8);
+}
 .draw {
   font-size: 14px;
   display: block;
@@ -36,7 +39,7 @@
   flex-shrink: 0;
   margin-left: auto;
   border-radius: 8px;
-  background-color: rgb(0 87 255 / 39%);
+  background-color: rgba(0, 110, 255, 0.474);
   color: white;
   padding: 1px 2px;
 }
