@@ -1,15 +1,14 @@
 import { Button } from '@mui/material';
-import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '../firebase';
-import pollConverter from './pollConverter';
+import { updateDoc } from 'firebase/firestore';
+import usePollRef from './usePollRef';
 
 interface PollCompletionButtonProps {
   pollId: string;
 }
 
 export default function PollCompletionButton({ pollId }: PollCompletionButtonProps) {
+  const pollRef = usePollRef(pollId);
   const onCloseVoting = () => {
-    const pollRef = doc(db, 'polls', pollId).withConverter(pollConverter);
     updateDoc(pollRef, { revealCount: 0 });
   };
   return (

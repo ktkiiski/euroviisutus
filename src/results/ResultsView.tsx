@@ -56,7 +56,7 @@ export default function ResultsView({
             zIndex: originalIndex === minIndex ? 1 : 0,
           };
           return (
-            <div className={styles.item} style={style}>
+            <div className={styles.item} style={style} key={result.contestant.code}>
               <ContestantItem key={contestant.code} contestant={contestant} score={score} />
             </div>
           );
