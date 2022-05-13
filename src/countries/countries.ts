@@ -824,7 +824,7 @@ const countries: Country[] = [
   {
     code: 'CZ',
     flag: '🇨🇿',
-    name: 'Czechia',
+    name: 'Czech Republic',
   },
   {
     code: 'MM',

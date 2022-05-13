@@ -7,6 +7,7 @@ import ContestantItem from '../contestants/ContestantItem';
 import Participant from '../participants/Participant';
 import useIsPollHost from '../participants/useIsPollHost';
 import useParticipantsCollectionRef from '../participants/useParticipantsCollectionRef';
+import Title from '../ui/Title';
 import styles from './ResultsView.module.css';
 
 interface ResultsViewProps {
@@ -35,7 +36,7 @@ export default function ResultsView({
   voteOptions,
   participantId,
 }: ResultsViewProps) {
-  const { contestants } = useContest(contestId);
+  const { contestants, title } = useContest(contestId);
   const participantCollectionRef = useParticipantsCollectionRef(pollId);
   const [participants] = useCollectionData(participantCollectionRef);
   const isHost = useIsPollHost(pollId, participantId);
@@ -50,6 +51,7 @@ export default function ResultsView({
   const sortedResults = sort(unsortedResults, ({ score }) => (score == null ? Infinity : -score));
   return (
     <>
+      <Title>{`${title} Results`}</Title>
       <div className={styles.list}>
         {unsortedResults.map((result, originalIndex) => {
           const { contestant, score } = result;

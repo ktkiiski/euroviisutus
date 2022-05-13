@@ -20,7 +20,7 @@ export default function VoteView({ participantId, pollId, contestId, voteOptions
   const participantRef = useParticipantRef(pollId, participantId);
   const [participant] = useDocumentData(participantRef);
   const contest = useContest(contestId);
-  const { contestants } = contest;
+  const { contestants, title } = contest;
   const contestantCodes = contestants.map((contestant) => contestant.code);
   if (!participant) {
     return <Loading />;
@@ -29,7 +29,7 @@ export default function VoteView({ participantId, pollId, contestId, voteOptions
   const items = union([votes, contestantCodes]);
   return (
     <>
-      <Title>{contest.id}</Title>
+      <Title>{title}</Title>
       <div className={styles.list}>
         <Sortable
           items={items}

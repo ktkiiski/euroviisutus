@@ -1,8 +1,50 @@
+import getCountryCodeByName from '../countries/getCountryCodeByName';
 import Contest from './Contest';
 
 const contests: Contest[] = [
   {
+    id: '2022-final',
+    title: 'Final 2022',
+    contestants: [
+      'Czech Republic',
+      'Romania',
+      'Portugal',
+      'Finland',
+      'Switzerland',
+      'France',
+      'Norway',
+      'Armenia',
+      'Italy',
+      'Spain',
+      'Netherlands',
+      'Ukraine',
+      'Germany',
+      'Lithuania',
+      'Azerbaijan',
+      'Belgium',
+      'Greece',
+      'Iceland',
+      'Moldova',
+      'Sweden',
+      'Australia',
+      'United Kingdom',
+      'Poland',
+      'Serbia',
+      'Estonia',
+    ]
+      .map((name, index) => {
+        const code = getCountryCodeByName(name);
+        return {
+          code,
+          draw: index + 1,
+        };
+      })
+      .filter(({ code }) => code !== 'FI'),
+  },
+  {
+    // TODO: remove this
     id: '2022-semifinal',
+    title: '1st Semifinal 2022',
     contestants: [
       { draw: 1, code: 'AL' },
       { draw: 2, code: 'LV' },
