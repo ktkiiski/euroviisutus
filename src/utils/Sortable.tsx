@@ -10,6 +10,7 @@ import {
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import SortableItem from './SortableItem';
 
 interface SortableProps<ID> {
@@ -23,7 +24,7 @@ const sortModifiers = [restrictToVerticalAxis];
 export default function Sortable({ items, onSort, children: renderItem }: SortableProps<string>) {
   const [localItems, setLocalItems] = useState(items);
   const [activeId, setActiveId] = useState<string | null>(null);
-  const sensors = useSensors(useSensor(PointerSensor), useSensor(TouchSensor));
+  const sensors = useSensors(useSensor(TouchSensor), useSensor(PointerSensor));
 
   useEffect(() => setLocalItems(items), [items]);
 
@@ -55,7 +56,10 @@ export default function Sortable({ items, onSort, children: renderItem }: Sortab
           </SortableItem>
         ))}
       </SortableContext>
-      <DragOverlay>{activeId ? renderItem(activeId, localItems.indexOf(activeId), true) : null}</DragOverlay>
+      {createPortal(
+        <DragOverlay>{activeId ? renderItem(activeId, localItems.indexOf(activeId), true) : null}</DragOverlay>,
+        document.body,
+      )}
     </DndContext>
   );
 }

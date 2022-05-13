@@ -1,3 +1,6 @@
+.sortableItem {
+  touch-action: none;
+}
 .idle {
   cursor: grab;
 }

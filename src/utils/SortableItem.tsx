@@ -1,5 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import classNames from 'classnames';
 import { ReactNode } from 'react';
 import styles from './SortableItem.module.css';
 
@@ -19,7 +20,7 @@ export default function SortableItem({ id, children }: SortableItemProps) {
   return (
     <div
       ref={setNodeRef}
-      className={isDragging ? styles.dragging : styles.idle}
+      className={classNames(styles.sortableItem, isDragging ? styles.dragging : styles.idle)}
       style={style}
       {...attributes}
       {...listeners}
