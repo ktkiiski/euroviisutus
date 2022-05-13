@@ -5,6 +5,7 @@ import useContest from '../contest/useContest';
 import ContestantItem from '../contestants/ContestantItem';
 import useParticipantRef from '../participants/useParticipantRef';
 import Loading from '../ui/Loading';
+import Title from '../ui/Title';
 import Sortable from '../utils/Sortable';
 import styles from './VoteView.module.css';
 
@@ -28,7 +29,7 @@ export default function VoteView({ participantId, pollId, contestId, voteOptions
   const items = union([votes, contestantCodes]);
   return (
     <>
-      <h3>{contest.id}</h3>
+      <Title>{contest.id}</Title>
       <div className={styles.list}>
         <Sortable
           items={items}

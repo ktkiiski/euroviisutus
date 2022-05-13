@@ -6,5 +6,5 @@ interface TitleProps {
 }
 
 export default function Title({ children }: TitleProps) {
-  return <h1 className={styles.container}>{children}</h1>;
+  return <h1 className={styles.title}>{children}</h1>;
 }
