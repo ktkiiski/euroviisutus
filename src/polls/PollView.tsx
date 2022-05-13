@@ -1,7 +1,5 @@
 import { updateDoc } from 'firebase/firestore';
-import { useEffect } from 'react';
 import { useCollectionData, useDocumentData } from 'react-firebase-hooks/firestore';
-import { v4 as uuid } from 'uuid';
 import ParticipantList from '../participants/ParticipantList';
 import ParticipantStatus from '../participants/ParticipantStatus';
 import useMyParticipantId from '../participants/useMyParticipantId';
@@ -20,20 +18,11 @@ interface PollViewProps {
 export default function PollView({ pollId }: PollViewProps) {
   const pollRef = usePollRef(pollId);
   const [poll] = useDocumentData(pollRef);
-  const [myParticipantId, setMyParticipantId] = useMyParticipantId();
+  const myParticipantId = useMyParticipantId();
   const participantsCollectionRef = useParticipantsCollectionRef(pollId);
   const [participants] = useCollectionData(participantsCollectionRef);
 
-  /**
-   * Generate an identifier for the user if missing.
-   */
-  useEffect(() => {
-    if (!myParticipantId) {
-      setMyParticipantId(uuid());
-    }
-  }, [myParticipantId, setMyParticipantId]);
-
-  if (!myParticipantId || !poll || !participants) {
+  if (!poll || !participants) {
     return <Loading />;
   }
   const myParticipant = participants.find((participant) => participant.id === myParticipantId);
@@ -47,6 +36,7 @@ export default function PollView({ pollId }: PollViewProps) {
       <ResultsView
         contestId={poll.contestId}
         pollId={pollId}
+        participantId={myParticipantId}
         voteOptions={poll.voteOptions}
         revealCount={revealCount}
         onRevealCountChange={(newRevealCount) => {
@@ -66,7 +56,7 @@ export default function PollView({ pollId }: PollViewProps) {
       />
       <ParticipantStatus participantId={myParticipantId} pollId={pollId} />
       <ParticipantList pollId={pollId} />
-      <PollCompletionButton pollId={pollId} />
+      <PollCompletionButton participantId={myParticipantId} pollId={pollId} />
     </>
   );
 }

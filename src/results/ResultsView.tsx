@@ -5,12 +5,14 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import useContest from '../contest/useContest';
 import ContestantItem from '../contestants/ContestantItem';
 import Participant from '../participants/Participant';
+import useIsPollHost from '../participants/useIsPollHost';
 import useParticipantsCollectionRef from '../participants/useParticipantsCollectionRef';
 import styles from './ResultsView.module.css';
 
 interface ResultsViewProps {
   contestId: string;
   pollId: string;
+  participantId: string;
   voteOptions: number[];
   revealCount: number;
   onRevealCountChange: (revealCount: number | null) => void;
@@ -31,10 +33,12 @@ export default function ResultsView({
   revealCount,
   onRevealCountChange,
   voteOptions,
+  participantId,
 }: ResultsViewProps) {
   const { contestants } = useContest(contestId);
   const participantCollectionRef = useParticipantsCollectionRef(pollId);
   const [participants] = useCollectionData(participantCollectionRef);
+  const isHost = useIsPollHost(pollId, participantId);
   if (!participants) {
     return <div>Loading…</div>;
   }
@@ -62,23 +66,25 @@ export default function ResultsView({
           );
         })}
       </div>
-      <div className={styles.controls}>
-        <Button
-          type="button"
-          variant="contained"
-          onClick={() => onRevealCountChange(revealCount <= 0 ? null : revealCount - 1)}
-        >
-          Back
-        </Button>
-        <Button
-          type="button"
-          variant="contained"
-          onClick={() => onRevealCountChange(revealCount + 1)}
-          disabled={revealCount >= contestants.length}
-        >
-          Show next
-        </Button>
-      </div>
+      {isHost && (
+        <div className={styles.controls}>
+          <Button
+            type="button"
+            variant="contained"
+            onClick={() => onRevealCountChange(revealCount <= 0 ? null : revealCount - 1)}
+          >
+            Back
+          </Button>
+          <Button
+            type="button"
+            variant="contained"
+            onClick={() => onRevealCountChange(revealCount + 1)}
+            disabled={revealCount >= contestants.length}
+          >
+            Show next
+          </Button>
+        </div>
+      )}
     </>
   );
 }
