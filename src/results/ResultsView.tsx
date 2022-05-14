@@ -1,7 +1,8 @@
 import { Button } from '@mui/material';
 import { sort } from 'immuton';
-import { CSSProperties } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 import useContest from '../contest/useContest';
 import ContestantItem from '../contestants/ContestantItem';
 import Participant from '../participants/Participant';
@@ -28,6 +29,13 @@ function getContestantScore(code: string, participants: Participant[], voteOptio
   }, 0);
 }
 
+const transitionClassNames: CSSTransitionClassNames = {
+  enter: styles.itemEnter,
+  enterActive: styles.itemEnterActive,
+  exit: styles.itemExit,
+  exitActive: styles.itemExitActive,
+};
+
 export default function ResultsView({
   contestId,
   pollId,
@@ -44,35 +52,15 @@ export default function ResultsView({
     return <div>Loading…</div>;
   }
   const minIndex = contestants.length - revealCount;
-  const unsortedResults = contestants.map((contestant, index) => {
-    const score = index >= minIndex ? getContestantScore(contestant.code, participants, voteOptions) : null;
+  const unsortedResults = contestants.map((contestant) => {
+    const score = getContestantScore(contestant.code, participants, voteOptions);
     return { contestant, score };
   });
   const sortedResults = sort(unsortedResults, ({ score }) => (score == null ? Infinity : -score));
+  const visibleResults = sortedResults.slice(minIndex);
   return (
     <>
       <Title>{`${title} Results`}</Title>
-      <div className={styles.list}>
-        {unsortedResults.map((result, originalIndex) => {
-          const { contestant, score } = result;
-          const sortedIndex = sortedResults.indexOf(result);
-          const indexOffset = sortedIndex - originalIndex;
-          const style: CSSProperties = {
-            transform: `translateY(${indexOffset * 100}%)`,
-            zIndex: originalIndex === minIndex ? 1 : 0,
-          };
-          return (
-            <div className={styles.item} style={style} key={result.contestant.code}>
-              <ContestantItem
-                key={contestant.code}
-                contestant={contestant}
-                score={score}
-                highlight={originalIndex === minIndex}
-              />
-            </div>
-          );
-        })}
-      </div>
       {isHost && (
         <div className={styles.controls}>
           <Button
@@ -92,6 +80,18 @@ export default function ResultsView({
           </Button>
         </div>
       )}
+      <TransitionGroup className={styles.list}>
+        {visibleResults.map((result, index) => {
+          const { contestant, score } = result;
+          return (
+            <CSSTransition key={result.contestant.code} classNames={transitionClassNames} timeout={500}>
+              <div className={styles.item}>
+                <ContestantItem key={contestant.code} contestant={contestant} score={score} highlight={index === 0} />
+              </div>
+            </CSSTransition>
+          );
+        })}
+      </TransitionGroup>
     </>
   );
 }

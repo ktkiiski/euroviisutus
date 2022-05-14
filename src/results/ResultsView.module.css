@@ -7,12 +7,28 @@
 .item {
   box-sizing: border-box;
   padding-bottom: 4px;
-  transition: transform 500ms ease-in-out;
 }
 .controls {
-  margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 2px;
+}
+.itemEnter,
+.itemExit {
+  transition: transform 500ms ease-in-out, opacity 500ms ease-in-out;
+}
+.itemEnter {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.itemEnterActive,
+.itemExit {
+  transform: translateX(0%);
+  opacity: 1;
+}
+.itemExitActive {
+  transform: translateX(100%);
+  opacity: 0;
 }
