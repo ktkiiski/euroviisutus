@@ -10,6 +10,7 @@ import useIsPollHost from '../participants/useIsPollHost';
 import useParticipantsCollectionRef from '../participants/useParticipantsCollectionRef';
 import Title from '../ui/Title';
 import styles from './ResultsView.module.css';
+import useCelebration from './useCelebration';
 
 interface ResultsViewProps {
   contestId: string;
@@ -48,10 +49,11 @@ export default function ResultsView({
   const participantCollectionRef = useParticipantsCollectionRef(pollId);
   const [participants] = useCollectionData(participantCollectionRef);
   const isHost = useIsPollHost(pollId, participantId);
+  const minIndex = contestants.length - revealCount;
+  const celebration = useCelebration(minIndex === 0);
   if (!participants) {
     return <div>Loading…</div>;
   }
-  const minIndex = contestants.length - revealCount;
   const unsortedResults = contestants.map((contestant) => {
     const score = getContestantScore(contestant.code, participants, voteOptions);
     return { contestant, score };
@@ -92,6 +94,7 @@ export default function ResultsView({
           );
         })}
       </TransitionGroup>
+      {celebration}
     </>
   );
 }
