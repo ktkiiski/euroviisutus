@@ -59,7 +59,11 @@ export default function ResultsView({
     return { contestant, score };
   });
   const sortedResults = sort(unsortedResults, ({ score }) => (score == null ? Infinity : -score));
-  const visibleResults = sortedResults.slice(minIndex);
+  const rankedResults = sortedResults.map((result, index) => ({
+    ranking: index + 1,
+    ...result,
+  }));
+  const visibleResults = rankedResults.slice(minIndex);
   return (
     <>
       <Title>{`${title} Results`}</Title>
@@ -84,11 +88,11 @@ export default function ResultsView({
       )}
       <TransitionGroup className={styles.list}>
         {visibleResults.map((result, index) => {
-          const { contestant, score } = result;
+          const { contestant, score, ranking } = result;
           return (
-            <CSSTransition key={result.contestant.code} classNames={transitionClassNames} timeout={500}>
+            <CSSTransition key={ranking} classNames={transitionClassNames} timeout={500}>
               <div className={styles.item}>
-                <ContestantItem key={contestant.code} contestant={contestant} score={score} highlight={index === 0} />
+                <ContestantItem ranking={ranking} code={contestant.code} score={score} highlight={index === 0} />
               </div>
             </CSSTransition>
           );
