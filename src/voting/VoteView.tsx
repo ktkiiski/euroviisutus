@@ -40,7 +40,7 @@ export default function VoteView({ participantId, pollId, contestId, voteOptions
           {(code, index, overlay) => {
             const voteValue: number | undefined = voteOptions[index];
             const contestant = contestants.find((c) => c.code === code)!;
-            return <ContestantItem contestant={contestant} score={overlay ? null : voteValue} />;
+            return <ContestantItem contestant={contestant} score={overlay ? null : voteValue} highlight={overlay} />;
           }}
         </Sortable>
       </div>

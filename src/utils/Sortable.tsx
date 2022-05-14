@@ -1,12 +1,4 @@
-import {
-  DndContext,
-  closestCenter,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  DragOverlay,
-  TouchSensor,
-} from '@dnd-kit/core';
+import { DndContext, closestCenter, useSensor, useSensors, DragOverlay, TouchSensor, MouseSensor } from '@dnd-kit/core';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useEffect, useState } from 'react';
@@ -24,7 +16,15 @@ const sortModifiers = [restrictToVerticalAxis];
 export default function Sortable({ items, onSort, children: renderItem }: SortableProps<string>) {
   const [localItems, setLocalItems] = useState(items);
   const [activeId, setActiveId] = useState<string | null>(null);
-  const sensors = useSensors(useSensor(TouchSensor), useSensor(PointerSensor));
+  const sensors = useSensors(
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 400,
+        tolerance: 3,
+      },
+    }),
+    useSensor(MouseSensor),
+  );
 
   useEffect(() => setLocalItems(items), [items]);
 

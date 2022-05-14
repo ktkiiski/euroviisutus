@@ -1,5 +1,5 @@
 .sortableItem {
-  touch-action: none;
+  touch-action: manipulation;
 }
 .idle {
   cursor: grab;
