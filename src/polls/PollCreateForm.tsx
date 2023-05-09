@@ -1,6 +1,6 @@
-import { Button } from '@mui/material';
+import { Box, Button, FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { addDoc, collection } from 'firebase/firestore';
-import { FormEventHandler } from 'react';
+import { FormEventHandler, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import contests from '../contest/contests';
 import { db } from '../firebase';
@@ -13,7 +13,8 @@ const pollCollection = collection(db, 'polls').withConverter(pollConverter);
 
 export default function PollCreateForm() {
   const navigate = useNavigate();
-  const [{ id: contestId }] = contests;
+  const [{ id: defaultContestId }] = contests;
+  const [contestId, setContestId] = useState(defaultContestId);
   const onSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
     const pollInitialData: Omit<Poll, 'id'> = {
@@ -30,9 +31,32 @@ export default function PollCreateForm() {
       <Logo />
       <Title>Welcome!</Title>
       <form onSubmit={onSubmit}>
-        <Button type="submit" variant="contained">
-          Start event
-        </Button>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+          <FormControl>
+            <InputLabel variant="standard" htmlFor="contest-select">
+              Select contest
+            </InputLabel>
+            <NativeSelect
+              value={contestId}
+              onChange={(event) => {
+                setContestId(event.currentTarget.value);
+              }}
+              inputProps={{
+                name: 'contest',
+                id: 'contest-select',
+              }}
+            >
+              {contests.map((contest) => (
+                <option key={contest.id} value={contest.id}>
+                  {contest.title}
+                </option>
+              ))}
+            </NativeSelect>
+          </FormControl>
+          <Button type="submit" variant="contained">
+            Start event
+          </Button>
+        </Box>
       </form>
     </>
   );

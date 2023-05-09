@@ -1,3 +1,4 @@
+import Contestant from '../contestants/Contestant';
 import getCountryCodeByName from '../countries/getCountryCodeByName';
 import Contest from './Contest';
 
@@ -5,7 +6,7 @@ const contests: Contest[] = [
   {
     id: '2022-final',
     title: 'Final 2022',
-    contestants: [
+    contestants: makeContestants([
       'Czech Republic',
       'Romania',
       'Portugal',
@@ -31,15 +32,7 @@ const contests: Contest[] = [
       'Poland',
       'Serbia',
       'Estonia',
-    ]
-      .map((name, index) => {
-        const code = getCountryCodeByName(name);
-        return {
-          code,
-          draw: index + 1,
-        };
-      })
-      .filter(({ code }) => code !== 'FI'),
+    ]),
   },
   {
     // TODO: remove this
@@ -68,3 +61,15 @@ const contests: Contest[] = [
 ];
 
 export default contests;
+
+function makeContestants(names: string[]): Contestant[] {
+  return names
+    .map((name, index) => {
+      const code = getCountryCodeByName(name);
+      return {
+        code,
+        draw: index + 1,
+      };
+    })
+    .filter(({ code }) => code !== 'FI');
+}
