@@ -41,6 +41,7 @@ export default function PollCreateForm() {
               onChange={(event) => {
                 setContestId(event.currentTarget.value);
               }}
+              variant="filled"
               inputProps={{
                 name: 'contest',
                 id: 'contest-select',

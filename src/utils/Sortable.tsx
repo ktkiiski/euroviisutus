@@ -1,4 +1,13 @@
-import { DndContext, closestCenter, useSensor, useSensors, DragOverlay, TouchSensor, MouseSensor } from '@dnd-kit/core';
+import {
+  DndContext,
+  closestCenter,
+  useSensor,
+  useSensors,
+  DragOverlay,
+  TouchSensor,
+  MouseSensor,
+  UniqueIdentifier,
+} from '@dnd-kit/core';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useEffect, useState } from 'react';
@@ -13,9 +22,13 @@ interface SortableProps<ID> {
 
 const sortModifiers = [restrictToVerticalAxis];
 
-export default function Sortable({ items, onSort, children: renderItem }: SortableProps<string>) {
+export default function Sortable<ID extends UniqueIdentifier>({
+  items,
+  onSort,
+  children: renderItem,
+}: SortableProps<ID>) {
   const [localItems, setLocalItems] = useState(items);
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [activeId, setActiveId] = useState<ID | null>(null);
   const sensors = useSensors(
     useSensor(TouchSensor, {
       activationConstraint: {
@@ -34,13 +47,13 @@ export default function Sortable({ items, onSort, children: renderItem }: Sortab
       collisionDetection={closestCenter}
       onDragStart={(event) => {
         const { active } = event;
-        setActiveId(active.id);
+        setActiveId(active.id as ID);
       }}
       onDragEnd={(event) => {
         const { active, over } = event;
         if (over != null && active.id !== over.id) {
-          const oldIndex = localItems.indexOf(active.id);
-          const newIndex = localItems.indexOf(over.id);
+          const oldIndex = localItems.indexOf(active.id as ID);
+          const newIndex = localItems.indexOf(over.id as ID);
           const sortedItems = arrayMove(localItems, oldIndex, newIndex);
           setLocalItems(sortedItems);
           onSort(sortedItems);

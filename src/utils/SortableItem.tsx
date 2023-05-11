@@ -1,3 +1,4 @@
+import { UniqueIdentifier } from '@dnd-kit/core';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import classNames from 'classnames';
@@ -5,7 +6,7 @@ import { ReactNode } from 'react';
 import styles from './SortableItem.module.css';
 
 interface SortableItemProps {
-  id: string;
+  id: UniqueIdentifier;
   children: ReactNode;
 }
 
