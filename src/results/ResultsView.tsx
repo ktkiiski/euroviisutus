@@ -15,7 +15,7 @@ import useCelebration from './useCelebration';
 interface ResultsViewProps {
   contestId: string;
   pollId: string;
-  participantId: string;
+  participantId?: string;
   voteOptions: number[];
   revealCount: number;
   onRevealCountChange: (revealCount: number | null) => void;

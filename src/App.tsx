@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
 import styles from './App.module.css';
 import PollCreateForm from './polls/PollCreateForm';
+import PollDashboard from './polls/PollDashboard';
 import PollView from './polls/PollView';
 import theme from './theme';
 import Loading from './ui/Loading';
@@ -14,6 +15,14 @@ function PollRoute() {
     throw new Error(`Missing poll ID`);
   }
   return <PollView pollId={pollId} />;
+}
+
+function PollDashboardRoute() {
+  const { pollId } = useParams();
+  if (!pollId) {
+    throw new Error(`Missing poll ID`);
+  }
+  return <PollDashboard pollId={pollId} />;
 }
 
 function HomeRoute() {
@@ -33,6 +42,7 @@ export default function App() {
           <Suspense fallback={<Loading />}>
             <Routes>
               <Route path="/polls/:pollId" element={<PollRoute />} />
+              <Route path="/polls/:pollId/dashboard" element={<PollDashboardRoute />} />
               <Route path="/" element={<HomeRoute />} />
               <Route path="*" element={<NotFoundRoute />} />
             </Routes>

@@ -1,5 +1,6 @@
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { updateDoc } from 'firebase/firestore';
+import { useHref } from 'react-router-dom';
 import useIsPollHost from '../participants/useIsPollHost';
 import usePollRef from './usePollRef';
 
@@ -14,14 +15,18 @@ export default function PollCompletionButton({ pollId, participantId }: PollComp
   const onCloseVoting = () => {
     updateDoc(pollRef, { revealCount: 0 });
   };
+  const dashboardHref = useHref('./dashboard');
   if (!isHost) {
     return null;
   }
   return (
-    <div>
+    <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: 2 }}>
+      <Button type="button" variant="contained" color="secondary" href={dashboardHref} target="dashboard">
+        Dashboard
+      </Button>
       <Button type="button" variant="contained" onClick={onCloseVoting}>
         Close voting
       </Button>
-    </div>
+    </Box>
   );
 }
