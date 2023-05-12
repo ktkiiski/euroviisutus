@@ -1,9 +1,9 @@
 body {
   margin: 0;
   background-image: url(./images/background.jpg);
-  background-size: auto 120vh;
-  background-position: center center;
-  background-attachment: fixed;
+  background-size: auto 240vh;
+  background-repeat: repeat;
+  background-position: center top;
 }
 
 code {
