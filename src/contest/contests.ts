@@ -19,7 +19,7 @@ const contests: Contest[] = [
       'Albania',
       'Italy',
       'Estonia',
-      'Finland',
+      '# Finland',
       'Czech Republic',
       'Australia',
       'Belgium',
@@ -42,7 +42,7 @@ const contests: Contest[] = [
       'Czech Republic',
       'Romania',
       'Portugal',
-      'Finland',
+      '# Finland',
       'Switzerland',
       'France',
       'Norway',
@@ -66,6 +66,38 @@ const contests: Contest[] = [
       'Estonia',
     ]),
   },
+  {
+    id: '2024-final',
+    title: '2024 Final',
+    contestants: makeContestants([
+      'Sweden',
+      'Ukraine',
+      'Germany',
+      'Luxembourg',
+      'Netherlands',
+      '# Israel',
+      'Lithuania',
+      'Spain',
+      'Estonia',
+      'Ireland',
+      'Latvia',
+      'Greece',
+      'United Kingdom',
+      'Norway',
+      'Italy',
+      'Serbia',
+      '# Finland',
+      'Portugal',
+      'Armenia',
+      'Cyprus',
+      'Switzerland',
+      'Slovenia',
+      'Croatia',
+      'Georgia',
+      'France',
+      'Austria',
+    ]),
+  },
 ];
 
 export default contests;
@@ -73,11 +105,12 @@ export default contests;
 function makeContestants(names: string[]): Contestant[] {
   return names
     .map((name, index) => {
+      if (name.startsWith('#')) return null;
       const code = getCountryCodeByName(name);
       return {
         code,
         draw: index + 1,
       };
     })
-    .filter(({ code }) => code !== 'FI');
+    .filter((contestant): contestant is Contestant => contestant !== null);
 }
