@@ -74,7 +74,7 @@ const contests: Contest[] = [
       'Ukraine',
       'Germany',
       'Luxembourg',
-      'Netherlands',
+      '# Netherlands',
       '# Israel',
       'Lithuania',
       'Spain',
