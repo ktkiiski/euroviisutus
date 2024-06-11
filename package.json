@@ -19,7 +19,7 @@
     "@types/react-dom": "^18.2.4",
     "@types/uuid": "^9.0.1",
     "classnames": "^2.3.2",
-    "firebase": "^9.21.0",
+    "firebase": "^10.12.2",
     "immuton": "^1.2.0",
     "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
