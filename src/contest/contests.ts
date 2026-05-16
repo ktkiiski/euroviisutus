@@ -4,6 +4,37 @@ import Contest from './Contest';
 
 const contests: Contest[] = [
   {
+    id: '2026-final',
+    title: '2026 Final',
+    contestants: makeContestants([
+      'Denmark',
+      'Germany',
+      'Israel',
+      'Belgium',
+      'Albania',
+      'Greece',
+      'Ukraine',
+      'Australia',
+      'Serbia',
+      'Malta',
+      'Czech Republic',
+      'Bulgaria',
+      'Croatia',
+      'United Kingdom',
+      'France',
+      'Moldova',
+      '# Finland',
+      'Poland',
+      'Lithuania',
+      'Sweden',
+      'Cyprus',
+      'Italy',
+      'Norway',
+      'Romania',
+      'Austria',
+    ]),
+  },
+  {
     id: '2025-final',
     title: '2025 Final',
     contestants: makeContestants([
