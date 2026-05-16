@@ -20,7 +20,7 @@ export default function PollCreateForm() {
     const pollInitialData: Omit<Poll, 'id'> = {
       contestId,
       hosts: [],
-      voteOptions: [12, 10, 8, 6, 4],
+      voteOptions: [12, 10, 8, 7, 6, 5, 4, 3, 2, 1],
     };
     const pollRef = await addDoc(pollCollection, pollInitialData);
     const pollId = pollRef.id;
